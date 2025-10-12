@@ -1,0 +1,18 @@
+@use '../../styles/index' as *;
+
+.button {
+  @include flex-center;
+
+  flex-shrink: 0;
+  gap: rem(10);
+  align-self: center;
+  font-size: fluid(18, 16);
+  background-color: var(--color-grey);
+  border-radius: var(--border-radius);
+  transition: background-color 0.3s ease 0s;
+  padding: rem(5);
+
+  @include hover {
+    background-color: var(--color-grey-active);
+  }
+}

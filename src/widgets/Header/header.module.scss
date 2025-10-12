@@ -1,0 +1,81 @@
+@use '../../shared/styles' as *;
+
+.header {
+  border-bottom: rem(2) solid var(--color-white);
+}
+
+.wrapper {
+  min-height: rem(70);
+  padding-block: rem(10);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  gap: rem(10);
+  position: relative;
+}
+
+.burgerWrapper {
+  @include tablet-above {
+    display: contents;
+  }
+
+  @include tablet {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    display: flex;
+    z-index: 20;
+    flex-direction: column;
+    gap: rem(20);
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    transition: right 0.3s ease 0s;
+    padding: rem(100) rem(20) rem(20) rem(20);
+    background-color: var(--color-grey-2);
+
+    &._active {
+      right: 0;
+    }
+  }
+}
+
+.inner {
+  justify-self: end;
+  display: flex;
+  gap: rem(10);
+
+  &._active {
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: rem(0) rem(0) rem(70) rem(0);
+  }
+
+  &._activeActions {
+    padding: rem(20) rem(0) rem(0) rem(0);
+    flex-direction: column;
+    gap: rem(20);
+  }
+
+  &._activeButtons {
+    padding: rem(20) rem(0) rem(0) rem(0);
+    justify-content: center;
+  }
+}
+
+.innerMobButton {
+  @include tablet-above {
+    display: none;
+  }
+
+  @include tablet {
+    justify-self: center;
+  }
+}
+
+.buttonIcon {
+  @include square(rem(20));
+
+  fill: var(--color-black);
+}

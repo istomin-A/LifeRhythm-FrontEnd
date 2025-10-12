@@ -1,0 +1,29 @@
+@use '../../shared/styles' as *;
+
+:root {
+  --font-family: 'Montserrat', sans-serif;
+
+  --container: #{rem(1400)};
+  --container-padding-x: #{rem(15)};
+
+  --border-radius: #{rem(15)};
+
+  --color-white: #fefefe;
+  --color-white-0-5: rgba(254, 254, 254, 0.5);
+  --color-black: #0f0f0f;
+  --color-black-2: #1a1a1a;
+  --color-back-3: #2a2a2a;
+
+  --color-grey: #b1b0b0;
+  --color-grey-0-5: rgba(177, 176, 176, 0.5);
+  --color-grey-2: #373737;
+  --color-grey-active: #8d8888;
+
+  --color-text: #f9efec;
+  --color-text-active: #e7beb1;
+
+  --color-active: #FE6022;
+
+  --color-button: #ce7d63;
+  --color-button-active: #a65f4a;
+}

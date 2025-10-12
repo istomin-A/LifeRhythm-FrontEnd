@@ -1,0 +1,12 @@
+@use '../../../shared/styles' as *;
+
+.textarea {
+  width: 100%;
+  font-size: rem(18);
+  color: var(--color-text);
+  min-height: rem(120);
+  padding: rem(10) rem(20);
+  border-radius: var(--border-radius);
+  background-color: var(--color-back-3);
+  resize: none;
+}

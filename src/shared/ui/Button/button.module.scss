@@ -1,0 +1,21 @@
+@use '../../styles/index' as *;
+
+.button {
+  @include flex-center(true);
+
+  flex-shrink: 0;
+  text-align: center;
+  min-height: rem(40);
+  font-weight: 600;
+  color: var(--color-black-2);
+  padding-block: rem(5);
+  padding-inline: rem(15);
+  border-radius: var(--border-radius);
+  background-color: var(--color-button);
+  font-size: fluid(16, 14);
+  transition: background-color 0.3s ease 0s;
+
+  @include hover {
+    background-color: var(--color-button-active);
+  }
+}

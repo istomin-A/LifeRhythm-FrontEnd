@@ -1,0 +1,15 @@
+@use '../../shared/styles' as *;
+
+.footer {
+  border-top: rem(2) solid var(--color-white);
+}
+
+.wrapper {
+  padding-block: rem(20);
+  text-align: center;
+  font-size: fluid(20, 16);
+
+  @include tablet {
+    padding: rem(20) rem(0) rem(90) rem(0);
+  }
+}

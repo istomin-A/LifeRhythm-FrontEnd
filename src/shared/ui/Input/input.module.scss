@@ -1,0 +1,20 @@
+@use '../../../shared/styles' as *;
+
+.input {
+  width: 100%;
+  font-size: rem(18);
+  color: var(--color-text);
+  min-height: rem(50);
+  padding: rem(7) rem(20) rem(7) rem(20);
+  border-radius: var(--border-radius);
+  background-color: var(--color-back-3);
+}
+
+.inputSearch {
+  width: 100%;
+  font-size: rem(18);
+  color: var(--color-text);
+  padding: rem(7) rem(50) rem(7) rem(15);
+  border-radius: var(--border-radius);
+  background-color: var(--color-back-3);
+}

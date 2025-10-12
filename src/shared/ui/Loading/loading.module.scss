@@ -1,0 +1,22 @@
+@use '../../../shared/styles/' as *;
+
+.loading {
+  @include fxd-center;
+
+  width: rem(50);
+  height: rem(50);
+  border: rem(5) solid var(--color-white);
+  border-top: rem(5) solid var(--color-grey);
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

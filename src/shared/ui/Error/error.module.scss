@@ -1,0 +1,8 @@
+@use '../../styles/' as *;
+
+.error {
+  @include fxd-center;
+
+  color: var(--color-active);
+  font-size: fluid(28, 20);
+}

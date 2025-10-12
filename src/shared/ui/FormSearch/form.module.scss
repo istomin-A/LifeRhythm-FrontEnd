@@ -1,0 +1,29 @@
+@use '../../../shared/styles' as *;
+
+.form {
+  position: relative;
+  width: 100%;
+}
+
+.button {
+  height: 100%;
+  padding-inline: rem(10);
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 5;
+  background-color: transparent;
+
+  @include hover {
+    .icon {
+      color: var(--color-grey-active);
+    }
+  }
+}
+
+.icon {
+  @include square(rem(25));
+
+  pointer-events: none;
+  color: var(--color-grey);
+}

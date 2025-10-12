@@ -1,0 +1,68 @@
+@use '../../shared/styles' as *;
+
+// =======================================================================================================
+body {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: fluid(18, 16);
+  color: var(--color-text);
+  background-color: var(--color-black-2);
+
+  &._lock {
+    overflow: hidden;
+  }
+
+  .page {
+    flex: 1 1 auto;
+    // fix slider swiper
+    min-width: 0;
+    display: flex;
+    gap: rem(20);
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+// =======================================================================================================
+// * Утилитарные классы
+
+// сontainer
+._container {
+  max-width: calc(var(--container) + var(--container-padding-x) * 2);
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--container-padding-x);
+}
+
+// visually-hidden
+._visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+  clip-path: inset(100%) !important;
+  clip: rect(0 0 0 0) !important;
+  overflow: hidden !important;
+}
+
+._h1 {
+  font-weight: 700;
+  font-size: fluid(36, 32);
+  text-align: center;
+  margin: rem(0) rem(0) rem(30) rem(0);
+}
+
+._susses {
+  border: rem(2) solid var(--color-grey);
+  padding: rem(8) rem(10);
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  margin: rem(0) rem(0) rem(20) rem(0);
+}

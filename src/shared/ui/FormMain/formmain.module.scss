@@ -1,0 +1,19 @@
+@use '../../../shared/styles' as *;
+
+.formMain {
+  display: flex;
+  flex-direction: column;
+  gap: rem(20);
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: rem(15);
+  font-size: fluid(20, 16);
+}
+
+.error {
+  font-weight: 700;
+  color: var(--color-active);
+}

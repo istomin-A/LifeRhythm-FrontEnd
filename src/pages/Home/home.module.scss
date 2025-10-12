@@ -1,0 +1,18 @@
+@use '../../shared/styles' as *;
+
+.wrapper {
+  padding-block: rem(20);
+}
+
+.formWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: rem(20);
+}
+
+.title {
+  font-weight: 700;
+  text-align: center;
+  font-size: fluid(36, 26);
+  margin: rem(0) rem(0) fluid(40, 15) rem(0);
+}

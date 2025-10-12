@@ -1,0 +1,24 @@
+@use '../../shared/styles' as *;
+
+.wrapper {
+  width: 100%;
+  padding: rem(80) rem(15) rem(20) rem(15);
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.inner {
+  max-width: rem(900);
+  width: 100%;
+  flex: 1 1 auto;
+  padding: rem(20) rem(20) rem(20) rem(20);
+  border-radius: var(--border-radius);
+  background-color: var(--color-grey-2);
+  border: 2px solid var(--color-grey);
+}
+
+.error {
+  border: rem(2) solid var(--color-active);
+  color: var(--color-active);
+}

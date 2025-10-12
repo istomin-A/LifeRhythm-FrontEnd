@@ -1,0 +1,20 @@
+@use '../../../shared/styles' as *;
+
+.logo {
+  @include flex-center;
+
+  position: relative;
+  z-index: 25;
+  justify-self: start;
+  font-weight: 600;
+  padding: rem(10);
+  font-size: fluid(30, 22);
+  color: var(--color-black-2);
+  background-color: var(--color-button);
+  border-radius: var(--border-radius);
+  transition: background-color 0.3s ease 0s;
+
+  @include hover {
+    background-color: var(--color-button-active);
+  }
+}
