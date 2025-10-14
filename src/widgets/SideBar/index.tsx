@@ -21,17 +21,17 @@ function SideBar() {
   const menuItems: MenuItem[] = [
     {
       label: "home",
-      path: "/",
+      path: "",
       link: "",
     },
     {
       label: "task",
-      path: "/",
+      path: "",
       link: "",
     },
     {
       label: "task1",
-      path: "/",
+      path: "",
       link: "",
     }
   ]

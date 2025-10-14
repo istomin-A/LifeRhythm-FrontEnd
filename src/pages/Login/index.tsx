@@ -45,7 +45,7 @@ function Registration() {
       });
 
       setTimeout(() => {
-        navigate("/")
+        navigate("")
       }, 5000);
     } catch (err) {
       setError({
