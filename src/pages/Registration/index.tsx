@@ -81,7 +81,7 @@ function Registration() {
       })
 
       setTimeout(() => {
-        navigate('/login');
+        navigate('login');
       }, 5000);
 
       setUsername("")

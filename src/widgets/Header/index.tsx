@@ -14,12 +14,12 @@ import style from './header.module.scss'
 const menuItems: MenuItem[] = [
   {
     label: "Регистрация",
-    path: "/registration",
+    path: "registration",
     link: "",
   },
   {
     label: "Войти",
-    path: "/login",
+    path: "login",
     link: "",
   }
 ]
@@ -54,7 +54,7 @@ function Header() {
 
   const logout = () => {
     sessionStorage.removeItem('token')
-    navigate('/login')
+    navigate('login')
   }
 
   return (

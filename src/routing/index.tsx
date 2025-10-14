@@ -22,13 +22,13 @@ export const router = createBrowserRouter([
       },
       // 🔓 публичные страницы
       {
-        path: '/login',
+        path: 'login',
         element: (
           <Login />
         ),
       },
       {
-        path: '/registration',
+        path: 'registration',
         element: (
           <Registration />
         ),
