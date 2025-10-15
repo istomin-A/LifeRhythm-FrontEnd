@@ -21,17 +21,17 @@ function SideBar() {
   const menuItems: MenuItem[] = [
     {
       label: "home",
-      path: "",
+      path: "/LifeRhythm-FrontEnd/",
       link: "",
     },
     {
       label: "task",
-      path: "",
+      path: "/LifeRhythm-FrontEnd/",
       link: "",
     },
     {
       label: "task1",
-      path: "",
+      path: "/LifeRhythm-FrontEnd/",
       link: "",
     }
   ]
