@@ -5,7 +5,7 @@ function Footer() {
     <footer className={style.footer}>
       <div className='_container'>
         <div className={style.wrapper}>
-          © 2025 LifeRhythm. Все права защищены.
+          © 2025 LifeRhythm. All rights reserved.
         </div>
       </div>
     </footer>

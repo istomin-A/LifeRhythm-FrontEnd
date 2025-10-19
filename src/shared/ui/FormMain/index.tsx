@@ -9,36 +9,42 @@ function FormMain({
   setPassword,
   setUsername,
   setTitleGoal,
+  setEmail,
   setDescriptoinGoal,
   username,
   password,
   titleGoal,
+  email,
   descriptoinGoal,
   handleAddUser,
   Goals,
+  sendEmail,
   labelUserName,
   labelPassword,
-  textArea
+  textArea,
+  oneInput
 }: FormMainProps) {
   return (
-    <form className={style.formMain} onSubmit={(e) => {
+    <form className={oneInput ? style.altFormMain : style.formMain} onSubmit={(e) => {
       handleAddUser?.(e)
       Goals?.(e)
+      sendEmail?.(e)
     }}>
       <label
         className={style.label}
       >{labelUserName}
         <Input
-          value={username ?? titleGoal ?? ''}
+          value={username ?? titleGoal ?? email ?? ''}
           onChange={(e) => {
             setUsername?.(e.target.value)
             setTitleGoal?.(e.target.value)
+            setEmail?.(e.target.value)
           }}
           type="text"
-          placeholder="Enter your username"
+          placeholder={labelUserName}
           name="username"
           style={
-            error?.field === "username" || error?.field === 'titleGoal'
+            error?.field === "username" || error?.field === 'titleGoal' || error?.field === 'email'
               ? { border: "2px solid red" }
               : {}
           }
@@ -51,10 +57,10 @@ function FormMain({
       {textArea
         ? (
           <label className={style.label}>
-            Enter discription
+            Enter description
             <Textarea
               value={descriptoinGoal ?? ''}
-              placeholder={'Enter discription'}
+              placeholder={'Enter description'}
               onChange={(e) => {
                 setDescriptoinGoal?.(e.target.value)
               }}
@@ -66,7 +72,7 @@ function FormMain({
             />
           </label>
         )
-        : (
+        : !oneInput && (
           <label
             className={style.label}
           >{labelPassword}
@@ -89,7 +95,7 @@ function FormMain({
       {error?.field === "password" || error?.field === 'descriptoinGoal'
         ? <div className={style.error}>{error.message}</div>
         : null}
-      <Button type='submit'>Send</Button>
+      <Button className={oneInput ? style.buttonForm : ''} type='submit'>Send</Button>
     </form>
   )
 }

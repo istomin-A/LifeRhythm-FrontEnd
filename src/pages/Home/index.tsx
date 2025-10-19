@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { GoalsAPI } from "@/store";
+import { GoalsAPI, UsersAPI } from "@/store";
 
 import Tabs from '@/widgets/Tabs'
 import FormMain from '@/shared/ui/FormMain'
@@ -7,11 +7,13 @@ import Loading from '@/shared/ui/Loading'
 
 import TabContent from './compotents/TabContent'
 
-import type { HomeProps } from './home.type'
+import { fotmatedAt } from './utils'
+import type { User } from '@/store/users/types'
+import type { TokenProps } from './home.type'
 import type { Goal } from '@/store/goals/types'
 import style from './home.module.scss'
 
-function Home({ infoToken }: HomeProps) {
+function Home({ infoToken }: TokenProps) {
   const [activeTab, setActiveTab] = useState<number>(1)
   const [titleGoal, setTitleGoal] = useState<string>("")
   const [descriptoinGoal, setDescriptoinGoal] = useState<string>("")
@@ -25,6 +27,8 @@ function Home({ infoToken }: HomeProps) {
   const [loading, setLoading] = useState(true);
   const [errorGetGoals, setErrorGetGoals] = useState<string | null>(null);
   const [errorUpdateGoals, setErrorUpdateGoals] = useState<string | null>(null);
+  const [endDate, setEndDate] = useState<{ createdAt: string; endDateTask: string } | null>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   // for 1 and 3 tab
   useEffect(() => {
@@ -45,6 +49,28 @@ function Home({ infoToken }: HomeProps) {
     getGoals();
   }, [infoToken?.user?.user_id, activeTab, deleteGoal, updateGoalStat]);
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userId = infoToken.user?.user_id;
+      if (!userId) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const data = await UsersAPI.getUser(userId);
+        setUser(data);
+      } catch (err: any) {
+        console.error("Failed to load data:", err);
+        setError({ field: "getUser", message: "Failed to load user" });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUser();
+  }, [infoToken.user?.user_id]);
+
   if (loading) return <Loading />;
   // if (errorGetGoals) return <Error>{errorGetGoals}</Error>;
 
@@ -53,31 +79,18 @@ function Home({ infoToken }: HomeProps) {
     ?.filter(goal => goal?.status === "active")
     ?.map(goal => ({
       ...goal,
-      fotmatedAt: new Date(String(goal.createdAt)).toLocaleString("uk-UA", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      }),
+      fotmatedAt: fotmatedAt(String(goal.createdAt))
     }));
 
   const doneGoals = userGoals
     ?.filter((goal) => goal?.status === "done")
     ?.map(goal => ({
       ...goal,
-      fotmatedAt: new Date(String(goal.createdAt)).toLocaleString("uk-UA", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      }),
+      fotmatedAt: fotmatedAt(String(goal.createdAt))
     }));
 
-  const removeGoal = (userId: string, createAt: string) => {
+  const removeGoal = (e: React.MouseEvent<HTMLButtonElement>, userId: string, createAt: string) => {
+    e.stopPropagation()
     const deleteGoal = async () => {
       try {
         const data = await GoalsAPI.deleteGoal(userId, createAt);
@@ -90,10 +103,17 @@ function Home({ infoToken }: HomeProps) {
     deleteGoal();
   }
 
-  const updateGoalStatus = (userId: string, createAt: string, status: string) => {
+  const updateGoalUI = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    userId: string,
+    createAt: string,
+    status: string,
+    dateDone: string
+  ) => {
+    e.stopPropagation()
     const updateGoal = async () => {
       try {
-        const data = await GoalsAPI.updateGoalStatus(userId, createAt, status);
+        const data = await GoalsAPI.updateGoalStatus(userId, createAt, status, dateDone);
         setUpdateGoalStat(data)
       } catch (err: any) {
         console.error("Failed to delete data:", err);
@@ -104,6 +124,30 @@ function Home({ infoToken }: HomeProps) {
     updateGoal();
   }
 
+  const setEndDateTask = (
+    userId: string,
+    createAt: string,
+    endDate: string) => {
+    const updateGoal = async () => {
+      try {
+        await GoalsAPI.setEndDateTask(userId, createAt, endDate);
+      } catch (err: any) {
+        console.error("Failed to delete data:", err);
+        setErrorUpdateGoals("Failed to delete data:")
+      }
+    };
+
+    updateGoal();
+  }
+
+  if (endDate && endDate.endDateTask) {
+    setEndDateTask(
+      String(infoToken.user?.user_id),
+      endDate?.createdAt,
+      String(endDate?.endDateTask)
+    )
+  }
+
   // for 2 tab
   const newGoals = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -111,7 +155,7 @@ function Home({ infoToken }: HomeProps) {
     if (!titleGoal || !descriptoinGoal) {
       setError({
         field: !titleGoal ? "titleGoal" : "descriptoinGoal",
-        message: "Заполните поле",
+        message: "Fill in the field",
       })
       return
     }
@@ -123,22 +167,45 @@ function Home({ infoToken }: HomeProps) {
           {
             titleGoal,
             descriptoinGoal,
-            status: 'active'
+            status: 'active',
+            endDateTask: '',
+            dateDone: ''
           }
         ]
       })
 
       setError({
         field: 'ok',
-        message: 'Цель создана',
+        message: 'Goal created',
       })
 
       setTitleGoal("")
       setDescriptoinGoal("")
     } catch (err) {
-      console.error("Ошибка при создании цели:", err)
+      console.error("Error creating goal:", err)
     }
   }
+
+  const sendEmail = async (
+    userId: string,
+    createDateGoal: string,
+    email: string,
+    titleEmail: string,
+    bodyEmail: string
+  ) => {
+    try {
+      await GoalsAPI.sendEmail(
+        userId,
+        createDateGoal,
+        email,
+        titleEmail,
+        bodyEmail
+      );
+    } catch (err) {
+      console.error("Error sending email:", err)
+    }
+  }
+
 
   // content tabs
   const tabOne = (
@@ -146,8 +213,11 @@ function Home({ infoToken }: HomeProps) {
       infoToken={infoToken}
       errorGetGoals={errorGetGoals}
       goals={activeGoals}
-      updateGoalStatus={updateGoalStatus}
+      updateGoalUI={updateGoalUI}
       removeGoal={removeGoal}
+      onSelectDate={(createdAt, endDateTask) => setEndDate({ createdAt, endDateTask })}
+      sendEmail={sendEmail}
+      user={user}
     />
   );
 
@@ -177,7 +247,7 @@ function Home({ infoToken }: HomeProps) {
   return (
     <div className='_container'>
       <div className={style.wrapper}>
-        <h1 className={style.title}>Управление целями</h1>
+        <h1 className={style.title}>Goal management</h1>
         <Tabs
           error={error}
           activeTab={activeTab}

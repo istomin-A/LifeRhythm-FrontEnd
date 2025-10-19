@@ -19,7 +19,7 @@ function Registration() {
     if (!username || !password) {
       setError({
         field: !username ? "username" : "password",
-        message: "Заполните поле",
+        message: "Fill in the field",
       })
       return
     }
@@ -30,7 +30,7 @@ function Registration() {
     if (trimmedUsername.length < 3) {
       setError({
         field: "username",
-        message: "Заполните поле",
+        message: "Fill in the field",
       })
       return
     }
@@ -38,7 +38,7 @@ function Registration() {
     if (trimmedPassword.length < 3) {
       setError({
         field: "password",
-        message: "Заполните поле",
+        message: "Fill in the field",
       })
       return
     }
@@ -46,7 +46,7 @@ function Registration() {
     if (!trimmedUsername) {
       setError({
         field: "username",
-        message: "Имя пользователя не может состоять из пробелов",
+        message: "Username cannot contain spaces.",
       })
       return
     }
@@ -54,7 +54,7 @@ function Registration() {
     if (!trimmedPassword) {
       setError({
         field: "password",
-        message: "Пароль не может состоять из пробелов",
+        message: "The password cannot contain spaces.",
       })
       return
     }
@@ -65,7 +65,7 @@ function Registration() {
     if (!hasLetter || !hasNumber) {
       setError({
         field: "password",
-        message: "Пароль должен содержать хотя бы одну букву и одну цифру",
+        message: "The password must contain at least one letter and one number.",
       })
       return
     }
@@ -73,11 +73,12 @@ function Registration() {
     try {
       await UsersAPI.postUser({
         username: trimmedUsername,
-        password: trimmedPassword
+        password: trimmedPassword,
+        email: ''
       })
       setError({
         field: 'ok',
-        message: 'Вы успешно зарегестрировались. Войдите. Перенаправление...',
+        message: 'You have successfully registered. Log in. Redirecting...',
       })
 
       setTimeout(() => {
@@ -87,7 +88,7 @@ function Registration() {
       setUsername("")
       setPassword("")
     } catch (err) {
-      console.error("Ошибка при создании пользователя:", err)
+      console.error("Error creating user:", err)
     }
   };
 

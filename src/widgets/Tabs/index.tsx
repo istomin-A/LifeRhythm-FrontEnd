@@ -25,7 +25,7 @@ function Tabs({
               aria-controls="tabpanel-one"
               aria-selected="true"
               onClick={() => handleClick(1)}
-            >Активные цели</button>
+            >Active Goals</button>
           </div>
           <div className={activeTab === 2 ? `${style.inner} ${style._active}` : style.inner}>
             <button
@@ -37,7 +37,7 @@ function Tabs({
               aria-selected="false"
               onClick={() => handleClick(2)}
               tabIndex={0}
-            >Создание цели</button>
+            >Creating a Goal</button>
           </div>
           <div className={activeTab === 3 ? `${style.inner} ${style._active}` : style.inner}>
             <button
@@ -49,7 +49,7 @@ function Tabs({
               aria-selected="false"
               onClick={() => handleClick(3)}
               tabIndex={0}
-            >Выполненные</button>
+            >Completed</button>
           </div>
         </div>
       </div>
@@ -68,7 +68,7 @@ function Tabs({
             aria-labelledby="tab-two"
           >
             <div className={style.wrapperForm}>
-              <h3 className={style.titleTab}>Создать цель</h3>
+              <h3 className={style.titleTab}>Create a goal</h3>
               {error.field === 'ok'
                 ? <div className='_susses'>{error.message}</div>
                 : null}

@@ -79,3 +79,7 @@
 
   fill: var(--color-black);
 }
+
+.icon {
+  @include square(rem(20));
+}

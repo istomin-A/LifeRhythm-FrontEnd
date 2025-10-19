@@ -2,9 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 import FullLayout from '@/pages/FullLayout';
 import AuthWrapper from "@/processes/auth/AuthWrapper";
 
-import Home from '@/pages/Home';
 import Registration from '@/pages/Registration';
 import Login from '@/pages/Login';
+import Home from '@/pages/Home';
+import Account from '@/pages/Account';
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,14 @@ export const router = createBrowserRouter([
         element: (
           <AuthWrapper>
             {(infoToken) => <Home infoToken={infoToken} />}
+          </AuthWrapper>
+        ),
+      },
+      {
+        path: 'account',
+        element: (
+          <AuthWrapper>
+            {(infoToken) => <Account infoToken={infoToken} />}
           </AuthWrapper>
         ),
       },

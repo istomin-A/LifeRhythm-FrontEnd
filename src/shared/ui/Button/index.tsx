@@ -1,7 +1,7 @@
 import type { ButtonProps } from './button.types'
 import style from './button.module.scss'
 
-function Button({ link, children, ...props }: ButtonProps) {
+function Button({ link, className, children, ...props }: ButtonProps) {
   if (link) {
     const anchorProps = props as React.AnchorHTMLAttributes<HTMLAnchorElement>;
     return (
@@ -11,7 +11,7 @@ function Button({ link, children, ...props }: ButtonProps) {
 
   const buttonProps = props as React.ButtonHTMLAttributes<HTMLButtonElement>;
   return (
-    <button {...buttonProps} className={style.button}>{children}</button>
+    <button {...buttonProps} className={`${style.button} ${className}`}>{children}</button>
   )
 }
 

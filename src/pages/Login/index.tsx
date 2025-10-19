@@ -5,7 +5,7 @@ import { UsersAPI } from "@/store";
 import FormMain from '@/shared/ui/FormMain'
 import style from './login.module.scss'
 
-function Registration() {
+function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -19,7 +19,7 @@ function Registration() {
     if (!username || !password) {
       setError({
         field: !username ? "username" : "password",
-        message: "Заполните поле",
+        message: "Fill in the field",
       })
       return
     }
@@ -33,7 +33,7 @@ function Registration() {
       const token = login.token;
 
       if (!token) {
-        console.error("Не удалось получить токен");
+        console.error("Failed to obtain token");
         return;
       }
 
@@ -41,7 +41,7 @@ function Registration() {
 
       setError({
         field: "ok",
-        message: "Вход выполнен! Перенаправление..."
+        message: "Login successful! Redirecting..."
       });
 
       setTimeout(() => {
@@ -50,9 +50,9 @@ function Registration() {
     } catch (err) {
       setError({
         field: "error",
-        message: "Неверный username или password"
+        message: "Incorrect username or password"
       });
-      console.error("Ошибка входа:", err)
+      console.error("Login error:", err)
     }
   };
 
@@ -80,4 +80,4 @@ function Registration() {
   )
 }
 
-export default Registration
+export default Login

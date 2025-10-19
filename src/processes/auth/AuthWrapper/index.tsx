@@ -10,7 +10,7 @@ function AuthWrapper({ children }: AuthWrapperProps) {
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     if (!token) {
-      navigate("login");
+      navigate("/login");
       return;
     }
 
@@ -18,7 +18,7 @@ function AuthWrapper({ children }: AuthWrapperProps) {
       .then((token) => setInfoToken(token))
       .catch(error => {
         console.error('Verification failed:', error);
-        navigate("login");
+        navigate("/login");
       })
   }, [navigate, sessionStorage.getItem("token")])
 

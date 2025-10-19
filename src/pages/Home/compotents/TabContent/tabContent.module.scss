@@ -1,4 +1,4 @@
-@use '../../../shared/styles' as *;
+@use '../../../../shared/styles' as *;
 
 .wrapperGoals {
   display: flex;
@@ -14,6 +14,12 @@
   padding: rem(10) fluid(20, 10);
   background-color: var(--color-back-3);
   border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: background-color 0.3s ease 0s;
+
+  @include hover {
+    background-color: var(--color-black-2);
+  }
 }
 
 .boxGoal {
@@ -32,10 +38,6 @@
   color: var(--color-white-0-5);
   margin: rem(0) rem(0) rem(10) rem(0);
 }
-
-.titleGoal {}
-
-.createdGoal {}
 
 .wrapperDescriptoinGoal {
   grid-column: span 2;

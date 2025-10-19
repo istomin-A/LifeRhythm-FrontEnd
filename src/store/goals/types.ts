@@ -2,6 +2,8 @@ export interface GoalItem {
   titleGoal: string;
   descriptoinGoal: string;
   status: string;
+  endDateTask: string;
+  dateDone: string
   createdAt?: string;
   fotmatedAt?: string;
 }

@@ -8,21 +8,9 @@ import ButtonActions from '@/shared/ui/ButtonActions'
 import CreateIcon from '@/shared/images/create.svg?react'
 import Logo from '@/shared/ui/Logo'
 
+import { menuItems } from './constants'
 import type { MenuItem } from './header.type'
 import style from './header.module.scss'
-
-const menuItems: MenuItem[] = [
-  {
-    label: "Регистрация",
-    path: "registration",
-    link: "",
-  },
-  {
-    label: "Войти",
-    path: "login",
-    link: "",
-  }
-]
 
 function Header() {
   const [open, setOpen] = useState<boolean>(false)
@@ -44,18 +32,33 @@ function Header() {
 
   const handleClick = (item: MenuItem) => {
     if (item.path) {
-      // Якщо є path, то викликаємо навігацію в межах додатку
       handleNavigation(item.path);
     } else if (item.link) {
-      // Якщо є link, то викликаємо перенаправлення через window.location.href
       window.location.href = item.link;
     }
   }
 
   const logout = () => {
     sessionStorage.removeItem('token')
-    navigate('login')
+    navigate('/login')
   }
+
+  const loginDashboard = (
+    <>
+      {
+        menuItems.map((item) => (
+          item.close && token ?
+            <Button
+              link={item.path}
+              onClick={() => handleClick(item)}
+              key={item.label}
+            >{item.icon ? <item.icon className={style.icon} /> : item.label}</Button>
+            : null
+        ))
+      }
+      <Button onClick={logout}>Log out</Button>
+    </>
+  )
 
   return (
     <header className={style.header}>
@@ -73,7 +76,7 @@ function Header() {
                 >{item.label}</Button>
               )
             })
-          ) : <Button onClick={logout}>Выйти</Button>}
+          ) : <Button onClick={logout}>Log out</Button>}
         </div>
 
         <div className={open ? `${style.burgerWrapper} ${style._active}` : style.burgerWrapper}>
@@ -81,32 +84,32 @@ function Header() {
 
           <div className={open ? `${style.inner} ${style._active}` : style.inner}>
             <div className={open ? `${style.inner} ${style._activeActions}` : style.inner}>
-              <ButtonActions title="Создать задачу" type='button'>
+              <ButtonActions title="Create a task" type='button'>
                 <CreateIcon className={style.buttonIcon} />
-                {open && (<div>Создать задачу</div>)}
+                {open && (<div>Create a task</div>)}
               </ButtonActions>
-              <ButtonActions title="Создать задачу" type='button'>
+              <ButtonActions title="Create a task" type='button'>
                 <CreateIcon className={style.buttonIcon} />
-                {open && (<div>Создать задачу</div>)}
+                {open && (<div>Create a task</div>)}
               </ButtonActions>
-              <ButtonActions title="Создать задачу" type='button'>
+              <ButtonActions title="Create a task" type='button'>
                 <CreateIcon className={style.buttonIcon} />
-                {open && (<div>Создать задачу</div>)}
+                {open && (<div>Create a task</div>)}
               </ButtonActions>
             </div>
 
             <div className={open ? `${style.inner} ${style._activeButtons}` : style.inner}>
               {!token ? (
-                menuItems.map((item) => {
-                  return (
+                menuItems.map((item) => (
+                  !token && !item.close ?
                     <Button
                       link={item.path}
                       onClick={() => handleClick(item)}
                       key={item.label}
                     >{item.label}</Button>
-                  )
-                })
-              ) : <Button onClick={logout}>Выйти</Button>}
+                    : null
+                ))
+              ) : loginDashboard}
             </div>
           </div>
         </div>

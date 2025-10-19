@@ -4,12 +4,15 @@
   position: fixed;
   top: 50%;
   left: 50%;
+  z-index: 100;
   transform: translate(-50%, -50%);
   margin: 0;
 
   display: block;
   opacity: 0;
   visibility: hidden;
+  border-radius: var(--border-radius);
+  background-color: var(--color-grey-2);
   box-shadow: 0 0 0 100vmax rgba(0, 0, 0, .7);
   transition: opacity .5s ease 0s, visibility .5s ease 0s, box-shadow .5s ease 0s;
 }
@@ -21,4 +24,22 @@
 
 .modal::backdrop {
   background-color: #00000000;
+}
+
+.modalContent {
+  position: relative;
+  width: 700px;
+  max-width: 85vw;
+  padding: fluid(70, 45) fluid(15, 8) rem(20) fluid(15, 8);
+}
+
+.modalClose {
+  position: absolute;
+  top: fluid(12, 7);
+  right: fluid(17, 10);
+  z-index: 20;
+}
+
+.icon {
+  @include square(rem(20));
 }

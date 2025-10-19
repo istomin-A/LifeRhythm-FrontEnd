@@ -66,3 +66,16 @@ body {
   font-weight: 600;
   margin: rem(0) rem(0) rem(20) rem(0);
 }
+
+._susses-done {
+  font-weight: 500;
+  font-size: fluid(22, 18);
+  color: var(--color-green);
+}
+
+._error {
+  display: block;
+  font-weight: 700;
+  color: var(--color-active);
+  margin: rem(0) rem(0) rem(10) rem(0);
+}

@@ -1,0 +1,15 @@
+@use '../../shared/styles' as *;
+
+.wrapper {
+  padding-block: rem(20);
+}
+
+.inner {
+  max-width: rem(900);
+  margin: 0 auto;
+}
+
+.text {
+  font-size: fluid(20, 18);
+  margin: rem(0) rem(0) fluid(40, 20) rem(0);
+}

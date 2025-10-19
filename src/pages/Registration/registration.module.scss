@@ -2,7 +2,7 @@
 
 .wrapper {
   width: 100%;
-  padding: rem(80) rem(15) rem(20) rem(15);
+  padding: fluid(80, 20) rem(15) rem(20) rem(15) !important;
   display: flex;
   justify-content: center;
   align-items: center
