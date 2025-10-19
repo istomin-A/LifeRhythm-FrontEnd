@@ -67,16 +67,16 @@ function Header() {
 
         <div className={`${style.inner} ${style.innerMobButton}`}>
           {!token ? (
-            menuItems.map((item) => {
-              return (
+            menuItems.map((item) => (
+              !token && !item.close ?
                 <Button
                   link={item.path}
                   onClick={() => handleClick(item)}
                   key={item.label}
                 >{item.label}</Button>
-              )
-            })
-          ) : <Button onClick={logout}>Log out</Button>}
+                : null
+            ))
+          ) : loginDashboard}
         </div>
 
         <div className={open ? `${style.burgerWrapper} ${style._active}` : style.burgerWrapper}>

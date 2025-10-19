@@ -6,7 +6,7 @@ export const menuItems: MenuItem[] = [
     close: true,
     label: "home",
     icon: HomeIcon,
-    path: "/",
+    path: "/LifeRhythm-FrontEnd/",
     link: "",
   },
 ]
