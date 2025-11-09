@@ -1,0 +1,69 @@
+@use '../../shared/styles' as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: rem(50);
+  padding-block: rem(20);
+}
+
+.chartWrapper {
+  max-width: rem(350);
+  width: 100%;
+  margin: rem(0) rem(0) rem(30) rem(0);
+}
+
+.trendWrapper {
+  width: 100%;
+  display: grid;
+  gap: rem(20);
+
+  @include tablet-above {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.linkWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: rem(10);
+}
+
+.title {
+  font-weight: 600;
+  font-size: fluid(32, 26);
+  color: var(--color-text);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: rem(20);
+}
+
+.text {
+  font-size: fluid(20, 18);
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: rem(10);
+}
+
+.buttonLink {
+  pointer-events: none;
+  opacity: .5;
+}
+
+.link {
+  align-self: start;
+  display: inline-block;
+  color: var(--color-button);
+  transition: color 0.3s ease 0s;
+
+  @include hover {
+    color: var(--color-text-active);
+  }
+}

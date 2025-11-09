@@ -6,6 +6,8 @@ import Registration from '@/pages/Registration';
 import Login from '@/pages/Login';
 import Home from '@/pages/Home';
 import Account from '@/pages/Account';
+import Statistics from '@/pages/Statistics';
+import ShareAchievements from '@/pages/ShareAchievements'
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ export const router = createBrowserRouter([
           </AuthWrapper>
         ),
       },
+      {
+        path: 'statistics',
+        element: (
+          <AuthWrapper>
+            {(infoToken) => <Statistics infoToken={infoToken} />}
+          </AuthWrapper>
+        ),
+      },
       // 🔓 публичные страницы
       {
         path: 'login',
@@ -40,6 +50,12 @@ export const router = createBrowserRouter([
         path: 'registration',
         element: (
           <Registration />
+        ),
+      },
+      {
+        path: 'share-achievements/:token',
+        element: (
+          <ShareAchievements />
         ),
       },
     ],

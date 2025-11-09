@@ -1,0 +1,58 @@
+@use '../../../shared/styles' as *;
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(rem(230), 1fr));
+  column-gap: rem(15);
+  row-gap: rem(25);
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: rem(5);
+
+  span {
+    display: block;
+  }
+}
+
+.title {
+  font-size: fluid(28, 24);
+  margin: rem(0) rem(0) rem(20) rem(0);
+  text-align: center;
+}
+
+.card {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  gap: rem(10);
+  border-radius: var(--border-radius);
+  padding: rem(15);
+  background: var(--color-grey-2);
+
+}
+
+.cardOk {
+  scale: 1;
+  transition: scale 0.7s ease 0s;
+
+  &:hover {
+    scale: 1.1;
+  }
+}
+
+.cardNo {
+  opacity: .6;
+}
+
+.icon {
+  @include square(rem(80));
+}
+
+.iconNo {
+  opacity: .6;
+}

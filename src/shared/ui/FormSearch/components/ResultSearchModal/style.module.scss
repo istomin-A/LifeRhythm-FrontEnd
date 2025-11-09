@@ -1,0 +1,42 @@
+@use '../../../../../shared/styles' as *;
+
+.title {
+  font-weight: 600;
+  font-size: fluid(30, 20);
+  margin: rem(0) rem(0) rem(20) rem(0);
+  color: var(--color-white);
+  text-align: center;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: fluid(20, 10);
+  color: var(--color-white);
+}
+
+.dateWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: rem(10);
+  margin: rem(0) rem(0) fluid(50, 20) rem(0);
+}
+
+.datePicker {
+  padding: rem(8) rem(10);
+  border: rem(2) solid var(--color-grey);
+  border-radius: var(--border-radius);
+  font-size: rem(16);
+  width: rem(200);
+  text-align: center;
+}
+
+.text {
+  color: var(--color-white);
+}
+
+.textActive {
+  font-weight: 700;
+  color: var(--color-text-active);
+}

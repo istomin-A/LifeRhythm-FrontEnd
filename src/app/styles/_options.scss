@@ -79,3 +79,9 @@ body {
   color: var(--color-active);
   margin: rem(0) rem(0) rem(10) rem(0);
 }
+
+._no-data {
+  @include flex-center;
+
+  min-height: rem(300);
+}

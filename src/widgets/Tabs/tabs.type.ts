@@ -10,4 +10,5 @@ export interface tabTypes {
   tabOne: React.ReactElement;
   tabTwo: React.ReactElement;
   tabThree: React.ReactElement;
+  tabFour: React.ReactElement;
 }

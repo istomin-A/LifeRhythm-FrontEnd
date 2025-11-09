@@ -8,6 +8,7 @@ function Tabs({
   tabOne,
   tabTwo,
   tabThree,
+  tabFour
 }: tabTypes) {
   const handleClick = (index: number) => setActiveTab(index)
 
@@ -51,6 +52,18 @@ function Tabs({
               tabIndex={0}
             >Completed</button>
           </div>
+          <div className={activeTab === 4 ? `${style.inner} ${style._active}` : style.inner}>
+            <button
+              className={activeTab === 4 ? `${style.button} ${style._active}` : style.button}
+              type="button"
+              id="tab-four"
+              role="tab"
+              aria-controls="tabpanel-four"
+              aria-selected="false"
+              onClick={() => handleClick(4)}
+              tabIndex={0}
+            >Overdue</button>
+          </div>
         </div>
       </div>
       <div className="__body" role="tabpanel">
@@ -81,6 +94,12 @@ function Tabs({
             className={style.content}
             id="tabpanel-three"
           >{tabThree}</div>
+        )}
+        {activeTab === 4 && (
+          <div
+            className={style.content}
+            id="tabpanel-four"
+          >{tabFour}</div>
         )}
       </div>
     </div>

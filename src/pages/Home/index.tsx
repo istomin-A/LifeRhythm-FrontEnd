@@ -7,7 +7,7 @@ import Loading from '@/shared/ui/Loading'
 
 import TabContent from './compotents/TabContent'
 
-import { fotmatedAt } from './utils'
+import { fotmatedAt } from '@/shared/utils/fotmatedAt'
 import type { User } from '@/store/users/types'
 import type { TokenProps } from './home.type'
 import type { Goal } from '@/store/goals/types'
@@ -89,6 +89,13 @@ function Home({ infoToken }: TokenProps) {
       fotmatedAt: fotmatedAt(String(goal.createdAt))
     }));
 
+  const overdueGoals = userGoals
+    ?.filter((goal) => goal?.status === "overdue")
+    ?.map(goal => ({
+      ...goal,
+      fotmatedAt: fotmatedAt(String(goal.createdAt))
+    }));
+
   const removeGoal = (e: React.MouseEvent<HTMLButtonElement>, userId: string, createAt: string) => {
     e.stopPropagation()
     const deleteGoal = async () => {
@@ -104,13 +111,13 @@ function Home({ infoToken }: TokenProps) {
   }
 
   const updateGoalUI = (
-    e: React.MouseEvent<HTMLButtonElement>,
     userId: string,
     createAt: string,
     status: string,
-    dateDone: string
+    dateDone: string,
+    e?: React.MouseEvent<HTMLButtonElement>
   ) => {
-    e.stopPropagation()
+    e?.stopPropagation();
     const updateGoal = async () => {
       try {
         const data = await GoalsAPI.updateGoalStatus(userId, createAt, status, dateDone);
@@ -244,6 +251,15 @@ function Home({ infoToken }: TokenProps) {
     />
   );
 
+  const tabFour = (
+    <TabContent
+      infoToken={infoToken}
+      errorUpdateGoals={errorUpdateGoals}
+      goals={overdueGoals}
+      removeGoal={removeGoal}
+    />
+  );
+
   return (
     <div className='_container'>
       <div className={style.wrapper}>
@@ -254,7 +270,9 @@ function Home({ infoToken }: TokenProps) {
           setActiveTab={setActiveTab}
           tabOne={tabOne}
           tabTwo={tabTwo}
-          tabThree={tabThree} />
+          tabThree={tabThree}
+          tabFour={tabFour}
+        />
       </div>
     </div>
   )

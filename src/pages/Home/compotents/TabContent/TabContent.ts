@@ -11,7 +11,7 @@ export interface TabContentProps {
   goals?: TabContentProps['activeGoals'];
   user?: User | null
 
-  updateGoalUI?: (e: React.MouseEvent<HTMLButtonElement>, userId: string, createdAt: string, status: string, dateDone: string) => void;
+  updateGoalUI?: (userId: string, createdAt: string, status: string, dateDone: string, e?: React.MouseEvent<HTMLButtonElement>) => void;
   removeGoal?: (e: React.MouseEvent<HTMLButtonElement>, userId: string, createdAt: string) => void;
   onSelectDate?: (createdAt: string, endDateTask: string) => void;
   sendEmail?: (

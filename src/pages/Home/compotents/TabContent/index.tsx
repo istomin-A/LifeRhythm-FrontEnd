@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Button from '@/shared/ui/Button';
 import ModalTask from '../ModalTask';
 
-import { fotmatedAt } from '../../utils'
+import { fotmatedAt } from '@/shared/utils/fotmatedAt'
 import type { TabContentProps } from './TabContent';
 import type { GoalItem } from '@/store/goals/types';
 import style from './tabContent.module.scss';
@@ -55,6 +55,15 @@ function TabContent({
             ? fotmatedAt(goal.dateDone)
             : null
 
+          if (goal.status === 'active' && isTaskOverdue) {
+            updateGoalUI?.(
+              String(infoToken?.user?.user_id),
+              encodeURIComponent(String(goal.createdAt)),
+              'overdue',
+              new Date().toISOString()
+            )
+          }
+
           if (goal.status === 'active' &&
             isTaskOverdue &&
             infoToken?.user?.user_id &&
@@ -77,9 +86,10 @@ function TabContent({
               onClick={() => openModal(goal)}
             >
               <div className={style.boxGoal}>
-                {goal?.status === 'active'
-                  ? isTaskOverdue && <div className='_error'>Task is overdue</div>
-                  : <div className='_susses-done'><span>Task completed: </span>{formatDateDone}</div>
+                {
+                  goal?.status === 'overdue' && <div className='_error'>Task is overdue</div>
+                  ||
+                  goal?.status === 'done' && <div className='_susses-done'><span>Task completed: </span>{formatDateDone}</div>
                 }
                 <div className={style.titleGoal}>
                   <div className={style.textBold}>Task:</div>
@@ -91,11 +101,11 @@ function TabContent({
                   <Button
                     onClick={(e) =>
                       updateGoalUI?.(
-                        e,
                         String(infoToken?.user?.user_id),
                         encodeURIComponent(String(goal.createdAt)),
                         'done',
-                        new Date().toISOString()
+                        new Date().toISOString(),
+                        e
                       )
                     }
                   >

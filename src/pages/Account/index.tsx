@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react'
 
-import { UsersAPI } from '@/store'
+import { UsersAPI, AchievementsAPI } from '@/store'
 import FormMain from '@/shared/ui/FormMain'
 import Button from '@/shared/ui/Button'
 import Loading from '@/shared/ui/Loading'
+import Achievements from '@/pages/Statistics/Achievements'
 import Error from '@/shared/ui/Error'
 
-import { fotmatedAt } from '@/pages/Home/utils'
+import { fotmatedAt } from '@/shared/utils/fotmatedAt'
 import type { User } from '@/store/users/types'
+import type { AchievementsType } from '@/store/achievements/types'
 import type { TokenProps } from '@/pages/Home/home.type'
 import style from './account.module.scss'
 
@@ -18,6 +20,7 @@ function Account({ infoToken }: TokenProps) {
     message: "",
   });
   const [user, setUser] = useState<User | null>(null);
+  const [achievements, setAchievements] = useState<AchievementsType | null>(null);
   const [loading, setLoading] = useState(true);
   const [changeEmail, setChangeEmail] = useState<boolean>(false)
 
@@ -41,6 +44,26 @@ function Account({ infoToken }: TokenProps) {
     };
 
     fetchUser();
+
+    const getAchievements = async () => {
+      const userId = infoToken.user?.user_id;
+      if (!userId) {
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const data = await AchievementsAPI.getAchievements(userId);
+        setAchievements(data);
+      } catch (err: any) {
+        console.error("Failed to load data:", err);
+        setErrorState({ field: "getUser", message: "Failed to load user" });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getAchievements();
   }, [infoToken.user?.user_id]);
 
   if (loading) return <Loading />
@@ -142,6 +165,10 @@ function Account({ infoToken }: TokenProps) {
         <div className={style.inner}>
           <div className={style.text}>Registration date: {fotmatedAt(user?.date_reg ?? '')}</div>
           {!user?.email || changeEmail ? enterEmail : emailInfo}
+        </div>
+
+        <div>
+          <Achievements data={achievements} account />
         </div>
       </div>
     </div>
